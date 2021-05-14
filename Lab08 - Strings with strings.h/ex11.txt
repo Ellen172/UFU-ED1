@@ -1,0 +1,19 @@
+a) Qual é a função do programa?
+É uma senha, para liberar ou não o acesso de quem está utilizando.
+
+b) Qual a saída quando a senha correta é digitada (senha correta: 1234)?
+Será printado: "Senha correta" e "Acesso liberado".
+
+c) Qual a saída para as seguintes senhas
+a. 123
+A saida sera: "Senha errada" e "Acesso negado"
+
+b. 12345
+A saida sera: "Senha errada" e "Acesso negado"
+
+c. 123456
+A saida sera: "Senha errada" e "Acesso liberado"
+
+d) Em quais casos o programa obteve um comportamento inválido? Explique o motivo.
+Quando digitamos a senha 123456, porque apesar de ser uma senha incorreta o programa libera o acesso.
+Isso ocorre possivelmente porque a senha digitada contém mais digitos do q o permitido (5), o que significa que ocorre um estouro da memória e o ultimo número (6) entra no próximo espaço válido, o pass, permitindo o acesso.
