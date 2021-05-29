@@ -1,4 +1,4 @@
-// .c
+#include "aluno.h"
 #include "TSeqList.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,22 +8,22 @@ struct lista {
     struct aluno dados[MAX];
 };
 
-Lista* cria_lista(){
-    Lista *li;
-    li = malloc(sizeof(Lista));
+TSeqList* cria_lista(){
+    TSeqList *li;
+    li = malloc(sizeof(TSeqList));
     if(li == NULL)
         return NULL;
     li->qtd = 0;
     return li;
 }
 
-void libera_lista(Lista* li){
+void libera_lista(TSeqList* li){
     free(li);
 }
 
 // ERRO : -1
 // SUCCESS : 0
-int consulta_lista_pos(Lista* li, int pos, struct aluno* al){
+int consulta_lista_pos(TSeqList* li, int pos, struct aluno* al){
     if(li == NULL || pos <= 0 || pos > li->qtd)
         return -1;
     *al = li->dados[pos-1];
@@ -32,7 +32,7 @@ int consulta_lista_pos(Lista* li, int pos, struct aluno* al){
 
 // ERRO : -1
 // SUCCESS : 0
-int consulta_lista_mat(Lista* li, int mat, struct aluno* al){
+int consulta_lista_mat(TSeqList* li, int mat, struct aluno* al){
     if(li == NULL)
         return -1;
     for(int i=li->qtd; i>=0; i--){
@@ -47,7 +47,7 @@ int consulta_lista_mat(Lista* li, int mat, struct aluno* al){
 
 // ERRO : -1
 // SUCCESS : 0
-int insere_lista_final(Lista* li, struct aluno al){
+int insere_lista_final(TSeqList* li, struct aluno al){
     if(li == NULL || li->qtd == MAX)
         return -1;
     li->dados[li->qtd] = al;
@@ -57,7 +57,7 @@ int insere_lista_final(Lista* li, struct aluno al){
 
 // ERRO : -1
 // SUCCESS : 0
-int insere_lista_inicio(Lista* li, struct aluno al){
+int insere_lista_inicio(TSeqList* li, struct aluno al){
     if(li == NULL || li->qtd == MAX)
         return -1;
     for(int i=li->qtd-1; i>=0; i--){
@@ -70,25 +70,15 @@ int insere_lista_inicio(Lista* li, struct aluno al){
 
 // ERRO : -1
 // SUCCESS : 0
-int insere_lista_ordenada(Lista* li, struct aluno al){
-    if(li == NULL)
-        return -1;
-    int i=0;
-    while(al.matricula > li->dados[i].matricula){
-        i++;
-    }
-    li->qtd++;
-    int j = li->qtd;
-    for(j=li->qtd; j>i; j--){
-        li->dados[j] = li->dados[j-1];
-    }
-    li->dados[j] = al;
-    return 0;
-}
+// int insere_lista_ordenada(Lista* li, struct aluno al){
+//     if(li == NULL)
+//         return -1;
+    
+// }
 
 // ERRO : -1
 // SUCCESS : 0
-int remove_lista_inicio(Lista* li){
+int remove_lista_inicio(TSeqList* li){
     if(li == NULL || li->qtd == 0)
         return -1;
     for(int i=0; i<li->qtd-1; i++){
@@ -100,28 +90,7 @@ int remove_lista_inicio(Lista* li){
 
 // ERRO : -1
 // SUCCESS : 0
-int remove_lista(Lista* li, int mat){
-    if(li == NULL)
-        return -1;
-    int i=0;
-    while(i<li->qtd && li->dados[i].matricula != mat){
-        i++;
-    }
-    if(i > li->qtd){
-        return -1;
-    } else {
-        li->qtd--;
-        while(i < li->qtd){
-            li->dados[i] = li->dados[i+1];
-            i ++;
-        }
-    }
-    return 0;
-}
-
-// ERRO : -1
-// SUCCESS : 0
-int remove_lista_final(Lista* li){
+int remove_lista_final(TSeqList* li){
     if(li == NULL)
         return -1;
     li->qtd--;
@@ -130,7 +99,7 @@ int remove_lista_final(Lista* li){
 
 // ERRO : -1
 // SUCCESS : tamanho da lista
-int tamanho_lista(Lista* li){
+int tamanho_lista(TSeqList* li){
     if(li == NULL)
         return -1;
     return li->qtd;
@@ -138,7 +107,7 @@ int tamanho_lista(Lista* li){
 
 // ERRO : -1
 // SUCCESS : true
-int lista_cheia(Lista* li){
+int lista_cheia(TSeqList* li){
     if(li == NULL)
         return -1;
     return (li->qtd == MAX);
@@ -146,13 +115,13 @@ int lista_cheia(Lista* li){
 
 // ERRO : -1
 // SUCCESS : true
-int lista_vazia(Lista* li){
+int lista_vazia(TSeqList* li){
     if(li == NULL)
         return -1;
     return (li->qtd == 0);
 }
 
-void imprime_lista(Lista* li){
+void imprime_lista(TSeqList* li){
     for(int i=0; i<li->qtd; i++){
         printf("Matricula: %d\n", li->dados[i].matricula);
         printf("Nome: %s\n", li->dados[i].nome);

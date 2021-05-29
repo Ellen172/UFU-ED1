@@ -108,6 +108,38 @@ int list_push_back(TLinkedList *list, struct aluno al)
     }
 }
 
+int list_insert(TLinkedList *list, int pos, struct aluno al){
+    if(pos < 1 || pos > list_size(list)+1)
+        return OUT_OF_RANGE;
+    if(list == NULL)
+        return INVALID_NULL_POINTER;
+    list_node *aluno, *node, *aux;
+    node = list->head;
+    aux = NULL;
+    aluno = malloc(sizeof(list_node));
+    if (aluno == NULL)
+        return OUT_OF_MEMORY;
+    aluno->data = al;
+    aluno->next = NULL;
+    int c=1;
+    while(c <= pos){
+        if(c == pos){
+            if(node == list->head){
+                list->head = aluno;
+                aluno->next = node;
+            } else {
+                aux->next = aluno;
+                aluno->next = node;            
+            }
+        } else {
+            aux = node;
+            node = node->next;
+        }
+        c++;
+    }
+    return SUCCESS;
+}
+
 int list_insert_sorted(TLinkedList *list, struct aluno al){
     if(list == NULL)
         return INVALID_NULL_POINTER;
@@ -190,18 +222,21 @@ int list_pop_back(TLinkedList *list){
 int list_erase(TLinkedList *list, int pos){
     if(list == NULL)
         return INVALID_NULL_POINTER;
-    list_node *node, *aux;
+    list_node *node, *aux, *erase;
     node = list->head;
     aux = NULL;
+    erase = NULL;
     int c=1;
     while (node != NULL && c <= pos){
         if(c == pos){
             if(node == list->head){
-                list->head = node->next;
                 free(node);
+                list->head = NULL;
             } else {
-                aux->next = node->next;
-                free(node);
+                erase = node;
+                node = node->next; 
+                aux->next = node;
+                free(erase);                
             }
         } else {
             node = node->next;
@@ -215,6 +250,54 @@ int list_erase(TLinkedList *list, int pos){
     } else {
         return SUCCESS;
     }
+    
+}
+
+int list_find_pos(TLinkedList *list, int pos, struct aluno *al){
+    if(list == NULL)
+        return INVALID_NULL_POINTER;
+    if(pos < 0 || pos > list_size(list))
+        return OUT_OF_RANGE;
+    list_node *node;
+    node = list->head;
+    int c=1;
+    while(c <= pos){
+        if(c == pos){
+            *al = node->data;
+        } else {
+            node = node->next;
+        }
+        c++;
+    }
+    return SUCCESS;
+}
+
+int list_find_mat(TLinkedList *list, int nmat, struct aluno *al){
+    if (list == NULL)
+        return INVALID_NULL_POINTER;
+    list_node *node;
+    node = list->head;
+    while(node != NULL){
+        if(node->data.matricula == nmat){
+            *al = node->data;
+            return SUCCESS;
+        }
+        node = node->next;
+    }
+    return ELEM_NOT_FOUND;
+}
+
+int list_front(TLinkedList *list, struct aluno *al){
+    if(list == NULL)
+        return INVALID_NULL_POINTER;
+    *al = list->head->data;
+}
+
+int list_back(TLinkedList *list, struct aluno *al){
+
+}
+
+int list_get_pos(TLinkedList *list, int nmat, int *pos){
     
 }
 

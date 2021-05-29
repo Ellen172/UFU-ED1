@@ -1,0 +1,27 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe - arquivo para compilar a pasta evolucao_tad",
+            "command": "D:\\portables\\mingw64\\bin\\gcc.exe",
+            "args": [
+                "-g",
+                "${fileDirname}\\${fileBasenameNoExtension}*.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compila arquivos exN*.c, onde N é o número do exemplo"
+        }
+    ],
+    "version": "2.0.0"
+}

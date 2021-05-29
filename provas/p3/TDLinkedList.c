@@ -271,3 +271,63 @@ int list_print_reverse(TDLinkedList *list) {
     }
     printf("\nFim da lista \n");
 }
+
+// prova 03
+int list_erase_pares(TDLinkedList *list){
+    if(list == NULL)
+        return INVALID_NULL_POINTER;
+    DLNode *node;
+    node = list->begin;
+    while(node != NULL){
+        if(node->data.matricula %2 == 0){
+            if(list->size == 1){
+                list->begin = NULL;
+                list->end = NULL;
+            } else if(node == list->begin){
+                list->begin = node->next;
+                node->next->prev = NULL;
+            } else if(node == list->end){
+                list->end = node->prev;
+                node->prev->next = NULL;
+            } else {
+                node->prev->next = node->next;
+                node->next->prev = node->next;
+            }
+            free(node);
+        }
+        node = node->next;
+    }
+    return SUCCESS;
+}
+
+int list_splice(TDLinkedList *dest, TDLinkedList *source, int pos){
+    if(dest == NULL)
+        return INVALID_NULL_POINTER;
+    if(source == NULL)
+        return OUT_OF_MEMORY;
+    if(pos < 0 || pos > dest->size+1)
+        return OUT_OF_RANGE;
+    DLNode *node;
+    node = dest->begin;
+    int c = 1;
+    if (pos > dest->size){
+        dest->end->next = source->begin;
+        dest->end = source->end;
+    } else if (dest->size == 0){
+        dest->begin = source->begin;
+        dest->end = source->end;
+    } else {
+        while (c < pos && node != NULL) {
+            node = node->next;
+            c++;
+        }
+        if(node == dest->begin){
+            dest->begin = source->begin;
+        } else {
+            node->prev->next = source->begin;
+        }
+        source->end->next = node;
+    }
+    dest->size += source->size;
+    return SUCCESS;
+}

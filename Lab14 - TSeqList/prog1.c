@@ -4,24 +4,40 @@
 #include "TSeqList.h"
 
 int main(){
-    Lista *li;
+    Lista *li, *li_ord;
     li = cria_lista(); 
+    li_ord = cria_lista(); 
     int ret, tam;
 
     struct aluno a, b, c, d;
-    a.matricula = 123;
+    a.matricula = 1;
     strcpy(a.nome, "Ana");
     a.n1 = 3; a.n2 = 6; a.n3 = 9;
-    b.matricula = 234;
+    b.matricula = 2;
     strcpy(b.nome, "Caio");
     b.n1 = 6; b.n2 = 7; b.n3 = 1;
-    c.matricula = 345;
+    c.matricula = 3;
     strcpy(c.nome, "Mariana");
     c.n1 = 5; c.n2 = 9; c.n3 = 7;
-    d.matricula = 456;
+    d.matricula = 4;
     strcpy(d.nome, "Amauri");
     d.n1 = 4; d.n2 = 8; d.n3 = 6; 
 
+    // lista ordenada
+    insere_lista_ordenada(li_ord, a);
+    insere_lista_ordenada(li_ord, d);
+    insere_lista_ordenada(li_ord, b);
+    insere_lista_ordenada(li_ord, c);
+    imprime_lista(li_ord);
+
+    int mat;
+    printf("Insira a matricula que deseja excluir: ");
+    scanf("%d", &mat);
+    remove_lista(li_ord, mat);
+    printf("\n");
+    imprime_lista(li_ord);
+
+    // lista desordenada
     insere_lista_final(li, a); // insere o aluno a no final da lista;
     insere_lista_inicio(li, b); // insere b no inicio da lista;
     insere_lista_final(li, c);

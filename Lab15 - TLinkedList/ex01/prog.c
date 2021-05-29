@@ -5,7 +5,7 @@
 
 int main(){
     TLinkedList *list;
-    int ret;
+    int ret, pos;
 
     struct aluno a,b,c,d;
     strcpy(a.nome,"Joao");
@@ -26,34 +26,89 @@ int main(){
        printf("ERRO!\n");
        exit(1);
     } 
+
     // inserindo elementos na lista
-    list_push_back(list, a);
-    list_push_back(list, b);
-    list_push_back(list, c);
-    list_push_front(list, d);        
-    // printar lista
+    printf("Digite a posicao que deseja inserir o aluno a: ");
+    scanf("%d", &pos);
+    ret = list_insert(list, pos, a); // insere na posição indicada
+    if (ret == OUT_OF_RANGE){
+      printf("Posicao inexistente\n");
+    }
+    list_push_back(list, b); // insere no final
+    list_push_front(list, c); // insere no inicio
+    printf("Digite a posicao que deseja inserir o aluno d: ");
+    scanf("%d", &pos);
+    ret = list_insert(list, pos, d); // insere na posição indicada
+    if (ret == OUT_OF_RANGE){
+      printf("Posicao inexistente\n");
+    }
+
     list_print(list);
     int tam = list_size(list);
     printf("\nTamanho da lista: %d\n", tam);
+    /* 
+    // imprimindo o primeiro elemento da lista
+    struct aluno *fst;
+    fst = malloc(sizeof(struct aluno));
+    printf("Primeiro aluno da lista\n");
+    ret = list_front(list, fst);
+    if(ret == SUCCESS){
+      printf("Matricula: %d\n", fst->matricula);
+      printf("Aluno: %s\n", fst->nome);
+      printf("Notas: %f, %f, %f;\n", fst->n1, fst->n2, fst->n3);
+    } else {
+      printf("Aluno nao encontrado\n");
+    }
+
+    // encontrando aluno pela posição
+    struct aluno *al;
+    al = malloc(sizeof(struct aluno));
+    printf("Digite a posicao desejada da lista: ");
+    scanf("%d", &pos);
+    ret = list_find_pos(list, pos, al);
+    if(ret == SUCCESS){
+      printf("Matricula: %d\n", al->matricula);
+      printf("Aluno: %s\n", al->nome);
+      printf("Notas: %f, %f, %f;\n", al->n1, al->n2, al->n3);
+    } else {
+      printf("Posicao nao encontrada\n");
+    }
+
+    // encontrando aluno pela matricula
+    struct aluno *al2;
+    al2 = malloc(sizeof(struct aluno));
+    int nmat;
+    printf("Digite a matricula desejada da lista: ");
+    scanf("%d", &nmat);
+    ret = list_find_mat(list, nmat, al2);
+    if(ret == SUCCESS){
+      printf("Matricula: %d\n", al2->matricula);
+      printf("Aluno: %s\n", al2->nome);
+      printf("Notas: %f, %f, %f;\n", al2->n1, al2->n2, al2->n3);
+    } else {
+      printf("Matricula nao encontrada\n");
+    }
+    */
+
     // retirando elementos da lista
     printf("\nRetirando elementos da lista\n");
-    list_erase(list, 2); // retirando elemento na posicao 2
-    // list_pop_front(list); // retirando elemento do inicio
-    // list_pop_back(list); // retirando elemento do fim 
+    list_erase(list, 3); // retirando da posicao 2
+    // list_pop_front(list); // retirando do inicio
+    // list_pop_back(list); // retirando do fim 
     list_print(list);
 
     list_free(list);
     list = NULL;
 
-    TLinkedList *listord;
-    listord = list_create(); 
-    list_insert_sorted(listord, c); 
-    list_insert_sorted(listord, a);
-    list_insert_sorted(listord, b);
-    list_insert_sorted(listord, d);
-    printf("Lista Ordenada\n");
-    list_print(listord);
-    list_free(listord);
-    listord = NULL;
+    // TLinkedList *listord;
+    // listord = list_create(); 
+    // list_insert_sorted(listord, c); 
+    // list_insert_sorted(listord, a);
+    // list_insert_sorted(listord, b);
+    // list_insert_sorted(listord, d);
+    // printf("Lista Ordenada\n");
+    // list_print(listord);
+    // list_free(listord);
+    // listord = NULL;
 
 }
