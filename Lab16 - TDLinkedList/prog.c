@@ -20,7 +20,7 @@ int main(){
 
     TDLinkedList *list;
     list = list_create(); // criando lista
-    int pos;
+    int pos, ret, mat;
     
     list_push_front(list, a);
     list_push_front(list, b);
@@ -40,9 +40,73 @@ int main(){
     list_erase(list, pos);
     list_print_forward(list);
 
+    struct aluno *al;
+    al = malloc(sizeof(struct aluno));
+    printf("\nDigite a posicao do aluno desejado: ");
+    scanf("%d", &pos);
+    ret = list_find_pos(list, pos, al);
+    if(ret == SUCCESS){
+        printf("Matricula: %d\n", al->matricula);
+        printf("Nome: %s\n", al->nome);
+        printf("Notas: %f, %f, %f\n", al->n1, al->n2, al->n3);
+    } else {
+        printf("Erro!\n");
+    }
+
+    struct aluno *al2;
+    al2 = malloc(sizeof(struct aluno));
+    printf("\nDigite a matricula do aluno desejado: ");
+    scanf("%d", &mat);
+    ret = list_find_mat(list, mat, al2);
+    if(ret == SUCCESS){
+        printf("Matricula: %d\n", al2->matricula);
+        printf("Nome: %s\n", al2->nome);
+        printf("Notas: %f, %f, %f\n", al2->n1, al2->n2, al2->n3);
+    } else {
+        printf("Erro!\n");
+    }
+
+/*
+    int *p;
+    p = malloc(sizeof(int));
+    printf("Digite a matricula da posicao desejada: ");
+    scanf("%d", &mat);
+    ret = list_get_pos(list, mat, p);
+    if(ret == SUCCESS){
+        printf("Posicao adquirida!\n");
+    } else {
+        printf("Erro!\n");
+    }
+*/
+
+    struct aluno *fst;
+    fst = malloc(sizeof(struct aluno));
+    ret = list_front(list, fst);
+    printf("\n=== Primeiro aluno da lista ===\n");
+    if(ret == SUCCESS){
+        printf("Matricula: %d\n", fst->matricula);
+        printf("Nome: %s\n", fst->nome);
+        printf("Notas: %f, %f, %f\n", fst->n1, fst->n2, fst->n3);
+    } else {
+        printf("Erro!\n");
+    }
+
+    struct aluno *end;
+    end = malloc(sizeof(struct aluno));
+    ret = list_back(list, end);
+    printf("\n=== Ultimo aluno da lista ===\n");
+    if(ret == SUCCESS){
+        printf("Matricula: %d\n", end->matricula);
+        printf("Nome: %s\n", end->nome);
+        printf("Notas: %f, %f, %f\n", end->n1, end->n2, end->n3);
+    } else {
+        printf("Erro!\n");
+    }
+
     list_pop_front(list);
     list_pop_back(list);
     list_print_forward(list);
+    list_print_reverse(list);
 
     list_free(list);
 

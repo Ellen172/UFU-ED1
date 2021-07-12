@@ -45,7 +45,7 @@ int* copia_diagonal(TMatQuad *mat){
     if(mat==NULL)
         return NULL;
     int *vet;
-    vet = malloc(mat->ordem*sizeof(int));
+    vet = malloc(mat->ordem*sizeof(int));// check:<<<erro: teste?>>>>
     int pos=0;
     for(int i=0; i<mat->ordem; i++){
         vet[i]=mat->dados[pos];

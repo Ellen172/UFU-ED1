@@ -21,10 +21,10 @@ int list_size(TDLinkedList *li); // feito
 int list_pop_front(TDLinkedList *li); // feito
 int list_pop_back(TDLinkedList *li); // feito
 int list_erase(TDLinkedList *li, int pos ); // feito
-int list_find_pos(TDLinkedList *li, int pos, struct aluno *al); 
-int list_find_mat(TDLinkedList *li, int nmat, struct aluno *al);   
-int list_front(TDLinkedList *li, struct aluno *al); 
-int list_back(TDLinkedList *li, struct aluno *al); 
-int list_get_pos(TDLinkedList *li, int nmat , int *pos); 
+int list_find_pos(TDLinkedList *li, int pos, struct aluno *al); // feito
+int list_find_mat(TDLinkedList *li, int nmat, struct aluno *al); // feito
+int list_front(TDLinkedList *li, struct aluno *al); // feito
+int list_back(TDLinkedList *li, struct aluno *al); // feito
+int list_get_pos(TDLinkedList *li, int nmat , int *pos); // incompleto
 int list_print_forward(TDLinkedList *li); // feito
-int list_print_reverse(TDLinkedList *li); 
+int list_print_reverse(TDLinkedList *li); // feito

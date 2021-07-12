@@ -46,16 +46,29 @@ int main(){
     list_print(list);
     int tam = list_size(list);
     printf("\nTamanho da lista: %d\n", tam);
-    /* 
+    /*
     // imprimindo o primeiro elemento da lista
     struct aluno *fst;
     fst = malloc(sizeof(struct aluno));
-    printf("Primeiro aluno da lista\n");
+    printf("\nPrimeiro aluno da lista\n");
     ret = list_front(list, fst);
     if(ret == SUCCESS){
       printf("Matricula: %d\n", fst->matricula);
       printf("Aluno: %s\n", fst->nome);
       printf("Notas: %f, %f, %f;\n", fst->n1, fst->n2, fst->n3);
+    } else {
+      printf("Aluno nao encontrado\n");
+    }
+
+    // imprimindo o ultimo elemento da lista
+    struct aluno *last;
+    last = malloc(sizeof(struct aluno));
+    printf("\nPrimeiro aluno da lista\n");
+    ret = list_back(list, last);
+    if(ret == SUCCESS){
+      printf("Matricula: %d\n", last->matricula);
+      printf("Aluno: %s\n", last->nome);
+      printf("Notas: %f, %f, %f;\n", last->n1, last->n2, last->n3);
     } else {
       printf("Aluno nao encontrado\n");
     }
@@ -88,18 +101,26 @@ int main(){
     } else {
       printf("Matricula nao encontrada\n");
     }
-    */
-
+*/
     // retirando elementos da lista
     printf("\nRetirando elementos da lista\n");
-    list_erase(list, 3); // retirando da posicao 2
+    printf("Digite a posicao que deseja excluir: ");
+    scanf("%d", &pos);
+    ret == list_erase(list, pos); // retirando da posicao inserida
+    if(ret == SUCCESS){
+      printf("Posicao removida!\n");
+    } else if(ret == OUT_OF_RANGE){
+      printf("Posicao fora do range!\n");
+    } else {
+      printf("Erro ao remover posicao!\n");
+    }
     // list_pop_front(list); // retirando do inicio
     // list_pop_back(list); // retirando do fim 
-    list_print(list);
+    // list_print(list);
 
     list_free(list);
     list = NULL;
-
+/*
     // TLinkedList *listord;
     // listord = list_create(); 
     // list_insert_sorted(listord, c); 
@@ -110,5 +131,5 @@ int main(){
     // list_print(listord);
     // list_free(listord);
     // listord = NULL;
-
+*/
 }

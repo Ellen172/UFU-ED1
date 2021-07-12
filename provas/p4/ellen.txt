@@ -1,0 +1,110 @@
+1) Qual o motivo de utilizar um vetor de acesso circular na implementação de uma fila estática?
+
+Uma lista estatica aloca no começo do programa o numero maximo de elementos, usando como exemplo uma 
+fila, ao excluir um elemento você estará perdendo aquela posição e não poderá mais acessa-la, sendo assim
+diminuirá a quantidade maxima de elementos. Por isso, utilizamos o vetor de acesso circular, ao excluir 
+um elemento no inicio você irá desconsiderar aquela posição, mas ao chegar no numero maximo de elementos 
+se quiser inserir mais um, você poderá voltar para a primeira posição se ela estiver vazia e então 
+utiliza-la.
+ 
+ check:<<<erro: tem várias formas de implementar o que foi relatado aqui. 
+ No entanto, faltou abordar a questão do tempo computacional que essa abordagem proporciona>>>>
+
+Ao criar um elemento você sempre estará o alocando na memoria porém, com uma fila estatica o tamanho da 
+lista não se altera, portanto, ao utilizar o vetor circular você estará alocando na memoria só até chegar ao 
+valor máximo de elementos, e depois disso, serão usados os primeiros (deletados) que já haviam sido alocados. 
+Dessa forma, há uma grande economia de memoria em relação aos programas de fila estatica sem vetor circular.
+
+2) Uma das utilidades das listas circulares dinâmicas é a possibilidade de percorrer todos os elementos 
+por diversas vezes em um loop. Modifique o TAD para incluir uma função que retornará sempre o próximo 
+elemento. Por exemplo, se a lista não foi percorrida ainda, o próximo elemento é a cabeça. Depois, 
+ao chamar a função novamente, será devolvido o segundo elemento, e assim sucessivamente.
+
+(a) mostrar como fica a estrutura do TAD
+
+.c
+
+struct node {
+    struct aluno dados;
+    struct node *prox;
+};
+ check:<<<erro: faltou a definição da lista>>>>
+struct list {
+    NDList *end;
+    NDList *loop;
+}
+typedef struct node NDList;
+
+.h
+
+struct aluno {
+    int matricula;
+    char nome[30]; 
+    float n1, n2, n3;
+};
+typedef struct list Lista;
+
+
+(b) mostrar a função que retorna o próximo elemento
+*Não é necessário mostrar as outras funções afetadas pela modificação proposta
+ check:<<<erro: não foi isso que foi pedido no exercício>>>>
+int show_list (Lista li, struct aluno *al) {
+    if(li == NULL)
+        return -1;
+    al = malloc(sizeof(struct aluno));
+    if(al == NULL)
+        return -2;
+    NDList node;
+    node = malloc(sizeof(NDList));
+    if(node == NULL)
+        return -2;
+    node = li->loop->next; // o nó auxiliar aponta para o loop (que define o 1º elemento no inicio)
+    li->loop = node->next; // o loop aponta para o proximo elemento
+    *al = node->dados; // a struct aluno retorna o valor do elemento atual
+
+    return 0;
+} 
+
+3) Crie uma função que faz a junção de duas strings. A função deve ter como entrada as duas strings e a 
+string resultante da junção. A alocação de espaço necessário para a string concatenada deve ser feita 
+dentro da função. A função deve retornar um valor inteiro: (0 - zero) se a junção ocorreu de forma 
+corretam; (-1) em caso de erro. Mostre o uso da função no programa principal. Não é permitido criar 
+novos tipos de dados para a solução do exercício (ou seja, sem uso de structs).
+
+Digite a string 1: Oi,
+Digite a string 2: Como vai?
+Texto concatenado: Oi, Como vai?
+
+main: 
+char str[50];
+concatena("Oi,", "Como vai?", str);
+ 
+>> resposta no arquivo main.c
+
+4) Mostre como uma pilha pode ser usada para resolver a expressão matemática abaixo
+
+Cada número e operador é lido em um passo. Para cada passo, mostre o estado da pilha 
+Exemplo de como mostrar a pilha 
+2 2 <topo  // o número 2 está no topo
+2 3 4 <topo // o número 4 está no topo
+
+Expressão: 
+ check:<<<erro: não era isso que foi pedido, era bem mais simples>>>>
+4 -1 6 - * 5 +      
+
+< topo
+4 < topo 
+4 -1 < topo 
+4 -1 6 < topo 
+4 -1 6 - < topo 
+// executa operação -
+4 -7 < topo 
+4 -7 * < topo 
+// executa operação *
+-28 < topo 
+-28 5 < topo 
+-28 5 + < topo 
+// executa operação +
+-23 < topo 
+
+Final: -23

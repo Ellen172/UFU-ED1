@@ -38,7 +38,7 @@ int definir_titulo(TGrafico* li, char *titulo){
 
 int insere_ponto(TGrafico* li, struct ponto pto, int pos){
     if(li == NULL || li->qtd > MAX)
-        return -1;
+        return -1;// check:<<<erro: e3.1 erro de teste lista nula E/OU lista cheia E/OU pos negativo E/OU pos > max>>>>
     if(pos <= li->qtd){
         for(int i=li->qtd; i>=pos; i--){
             li->ptos[i+1] = li->ptos[i];
@@ -53,7 +53,7 @@ int insere_ponto(TGrafico* li, struct ponto pto, int pos){
     for(int i=li->qtd; i<pos; i++){
         li->ptos[pos] = zero;
     }
-    li->qtd+=pos;
+    li->qtd+=pos;// check:<<<erro: e3.4  Erro na quantidade final de elementos da lista>>>>
     li->ptos[pos] = pto;
     return 0;
 }
@@ -77,6 +77,7 @@ int mostrar_grafico(TGrafico* li){
     free(p);
 }
 
+// check:<<<erro: era para fazer a função maior e não todas as funções do TAD>>>>
 // int maior_y(TGrafico* li, float *maior_y, struct ponto pto){
 //     for(int i=1; i<=li->qtd; i++){
 //         if(i==1)

@@ -222,35 +222,32 @@ int list_pop_back(TLinkedList *list){
 int list_erase(TLinkedList *list, int pos){
     if(list == NULL)
         return INVALID_NULL_POINTER;
-    list_node *node, *aux, *erase;
+    list_node *node, *aux;
     node = list->head;
     aux = NULL;
-    erase = NULL;
     int c=1;
-    while (node != NULL && c <= pos){
+    while (node != NULL){
         if(c == pos){
             if(node == list->head){
-                free(node);
-                list->head = NULL;
+                if(node->next == NULL){
+                    list->head = NULL;
+                    free(node);
+                } else {
+                    list->head = node->next;
+                    free(node);
+                }
             } else {
-                erase = node;
-                node = node->next; 
-                aux->next = node;
-                free(erase);                
+                aux->next = node->next;
+                free(node);                
             }
-        } else {
-            node = node->next;
-            aux = node;
-        }
+            return SUCCESS;
+        } 
+        aux = node;
+        node = node->next;
         c++;
     }
 
-    if(c < pos){
-        return OUT_OF_RANGE;    
-    } else {
-        return SUCCESS;
-    }
-    
+    return OUT_OF_RANGE;
 }
 
 int list_find_pos(TLinkedList *list, int pos, struct aluno *al){
@@ -291,10 +288,19 @@ int list_front(TLinkedList *list, struct aluno *al){
     if(list == NULL)
         return INVALID_NULL_POINTER;
     *al = list->head->data;
+    return SUCCESS;
 }
 
 int list_back(TLinkedList *list, struct aluno *al){
-
+    if(list == NULL)
+        return INVALID_NULL_POINTER;
+    list_node *node;
+    node = list->head;
+    while(node->next != NULL){
+        node = node->next;
+    }
+    *al = node->data;
+    return SUCCESS;
 }
 
 int list_get_pos(TLinkedList *list, int nmat, int *pos){

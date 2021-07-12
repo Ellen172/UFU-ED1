@@ -224,16 +224,70 @@ int list_erase(TDLinkedList *li, int pos ){
     return SUCCESS;
 }
 
-int list_find_pos(TDLinkedList *li, int pos, struct aluno *al); 
+int list_find_pos(TDLinkedList *li, int pos, struct aluno *al){
+    if(li == NULL)
+        return INVALID_NULL_POINTER;
+    if(pos<0 || pos>li->size)
+        return OUT_OF_RANGE;
+    DLNode *node;
+    node = li->begin;
+    int cont=1;
+    while(cont<pos && node != NULL){
+        node = node->next;
+        cont++;
+    }
+    if(cont == pos){
+        *al = node->data;
+    }
+    return SUCCESS;
+}
 
-int list_find_mat(TDLinkedList *li, int nmat, struct aluno *al);   
+int list_find_mat(TDLinkedList *li, int nmat, struct aluno *al){
+    if(li == NULL)
+        return INVALID_NULL_POINTER;
+    DLNode *node;
+    node = li->begin;
+    while(node != NULL && node->data.matricula != nmat){
+        node = node->next;
+    }
+    if(node == NULL){
+        return OUT_OF_RANGE;
+    } else {
+        *al = node->data;
+    } 
+    return SUCCESS;
+}
 
-int list_front(TDLinkedList *li, struct aluno *al); 
+int list_front(TDLinkedList *li, struct aluno *al){
+    if(li == NULL)
+        return INVALID_NULL_POINTER;
+    *al = li->begin->data;
+    return SUCCESS;
+}
 
-int list_back(TDLinkedList *li, struct aluno *al); 
-
-int list_get_pos(TDLinkedList *li, int nmat , int *pos); 
-
+int list_back(TDLinkedList *li, struct aluno *al){
+    if(li == NULL)
+        return INVALID_NULL_POINTER;
+    *al = li->end->data;
+    return SUCCESS;
+}
+/*
+int list_get_pos(TDLinkedList *li, int nmat , int *pos){
+    if(li == NULL)
+        return INVALID_NULL_POINTER;
+    DLNode *node;
+    node = li->begin;
+    while(node != NULL && node->data.matricula != nmat){
+        node = node->next;
+    }
+    if(node == NULL){
+        return OUT_OF_RANGE;
+    } else {
+        pos = node;
+    } 
+    return SUCCESS;
+}
+*/
 int list_print_forward(TDLinkedList *li) {
     if (li == NULL)
         return INVALID_NULL_POINTER;
