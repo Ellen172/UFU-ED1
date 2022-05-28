@@ -1,17 +1,20 @@
 # TAD 
-TMat2D.h -> (header) biblioteca com funções
-TMat2D.c -> execução das funções (especificadas no .h)
-main.c -> principal
+<p>TMat2D.h -> (header) biblioteca com funções</p>
+<p>TMat2D.c -> execução das funções (especificadas no .h)</p>
+<p>main.c -> principal</p>
 
 ## Executando programa 
 
 ### versão 1
-gcc -o main.exe main.c TMat2D.c     //cria executavel de main.c utilizando .c
+<p>gcc -o main.exe main.c TMat2D.c <em>//cria executavel de main.c utilizando .c</em></p>
 
 ### versão 2
-gcc -o TMat2D.o -c TMat2D.c         //cria arquivo compilado de TMat2D.c 
-gcc -o main.o -c main.c             //cria compilado de main.c
-gcc -o main.exe main.o TMat2D.o     //cria executavel usando os arquivos compilados
+<p>gcc -o TMat2D.o -c TMat2D.c <em>//cria arquivo compilado de TMat2D.c</em></p>
+<p>gcc -o main.o -c main.c <em>//cria compilado de main.c</em></p>
+<p>gcc -o main.exe main.o TMat2D.o <em>//cria executavel usando os arquivos compilados</em></p>
 
 ## Envio do programa pronto 
-TMat2D.h + TMat2D.o
+<ul>
+    <li>TMat2D.h</li>
+    <li>TMat2D.o</li>
+</ul>
