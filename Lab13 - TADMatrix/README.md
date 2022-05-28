@@ -17,4 +17,5 @@
 <ul>
     <li>TMat2D.h</li>
     <li>TMat2D.o</li>
+    <li>main.o</li>
 </ul>
