@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct matriz Matriz;
+typedef struct matriz Matriz; // altera o nome: struct matriz -> Matriz
 
 // Criar
 Matriz *cria_matriz(int nlin, int ncol);
